@@ -1,0 +1,158 @@
+# English translations for rawtools package.
+# This file is put in the public domain.
+# Automatically generated, 2006.
+#
+# All this catalog "translates" are quotation characters.
+# The msgids must be ASCII and therefore cannot contain real quotation
+# characters, only substitutes like grave accent (0x60), apostrophe (0x27)
+# and double quote (0x22). These substitutes look strange; see
+# http://www.cl.cam.ac.uk/~mgk25/ucs/quotes.html
+#
+# This catalog translates grave accent (0x60) and apostrophe (0x27) to
+# left single quotation mark (U+2018) and right single quotation mark (U+2019).
+# It also translates pairs of apostrophe (0x27) to
+# left single quotation mark (U+2018) and right single quotation mark (U+2019)
+# and pairs of quotation mark (0x22) to
+# left double quotation mark (U+201C) and right double quotation mark (U+201D).
+#
+# When output to an UTF-8 terminal, the quotation characters appear perfectly.
+# When output to an ISO-8859-1 terminal, the single quotation marks are
+# transliterated to apostrophes (by iconv in glibc 2.2 or newer) or to
+# grave/acute accent (by libiconv), and the double quotation marks are
+# transliterated to 0x22.
+# When output to an ASCII terminal, the single quotation marks are
+# transliterated to apostrophes, and the double quotation marks are
+# transliterated to 0x22.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rawtools 0.1\n"
+"Report-Msgid-Bugs-To: Ivan Shmakov <ivan@theory.asu.ru>\n"
+"POT-Creation-Date: 2006-07-17 12:09+0700\n"
+"PO-Revision-Date: 2006-07-17 12:09+0700\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/rawflt2u1.c:4
+msgid "Convert `float' stream into `uint8_t' one"
+msgstr "Convert ‘float’ stream into ‘uint8_t’ one"
+
+#: src/rawflt2u1.c:17
+msgid ""
+"Copyright (C) 2006 Ivan Shmakov\n"
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+msgstr ""
+"Copyright (C) 2006 Ivan Shmakov\n"
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+
+#: src/rawflt2u1.c:285
+msgid "specifying the transformation table"
+msgstr "specifying the transformation table"
+
+#: src/rawflt2u1.c:288
+msgid "pre-multiply the table boundaries with the inverse of this value"
+msgstr "pre-multiply the table boundaries with the inverse of this value"
+
+#: src/rawflt2u1.c:291
+msgid "pre-multiply the table values with the inverse of this value"
+msgstr "pre-multiply the table values with the inverse of this value"
+
+#: src/rawflt2u1.c:295
+msgid "append the contents of the file to the transformation table"
+msgstr "append the contents of the file to the transformation table"
+
+#: src/rawflt2u1.c:297
+msgid ""
+"append ENTRY to the transformation table; ENTRY is a pair of floats "
+"separated by a comma"
+msgstr ""
+"append ENTRY to the transformation table; ENTRY is a pair of floats "
+"separated by a comma"
+
+#: src/rawflt2u1.c:299
+msgid "miscellaneous"
+msgstr "miscellaneous"
+
+#: src/rawflt2u1.c:301
+msgid "select input format, which may be `float' (default) or `double'"
+msgstr "select input format, which may be ‘float’ (default) or ‘double’"
+
+#: src/rawflt2u1.c:304
+msgid "use interpolation TYPE, which may be `none' (default) or `linear'"
+msgstr "use interpolation TYPE, which may be ‘none’ (default) or ‘linear’"
+
+#: src/rawflt2u1.c:307
+msgid "output the result to this file instead of stdout"
+msgstr "output the result to this file instead of stdout"
+
+#: src/rawflt2u1.c:309
+msgid "explain what is being done"
+msgstr "explain what is being done"
+
+#: src/rawflt2u1.c:368
+#, c-format
+msgid "invalid argument `%s' for `%s'; should be a float"
+msgstr "invalid argument ‘%s’ for ‘%s’; should be a float"
+
+#: src/rawflt2u1.c:380
+#, c-format
+msgid "couldn't handle file name `%s'"
+msgstr "couldn't handle file name ‘%s’"
+
+#: src/rawflt2u1.c:389
+#, c-format
+msgid "invalid entry `%s'; should be `FLOAT, FLOAT'"
+msgstr "invalid entry ‘%s’; should be ‘FLOAT, FLOAT’"
+
+#: src/rawflt2u1.c:395
+#, c-format
+msgid "couldn't handle entry `%s'"
+msgstr "couldn't handle entry ‘%s’"
+
+#: src/rawflt2u1.c:405
+#, c-format
+msgid ""
+"invalid argument `%s' for `--interpolation'; should be `none' or `linear'"
+msgstr ""
+"invalid argument ‘%s’ for ‘--interpolation’; should be ‘none’ or ‘linear’"
+
+#: src/rawflt2u1.c:419
+#, c-format
+msgid "invalid argument `%s' for `--format'; should be `float' or `double'"
+msgstr "invalid argument ‘%s’ for ‘--format’; should be ‘float’ or ‘double’"
+
+#: src/rawflt2u1.c:438
+msgid "couldn't store non-option arguments"
+msgstr "couldn't store non-option arguments"
+
+#: src/rawflt2u1.c:447
+msgid "couldn't set stdin as the input file"
+msgstr "couldn't set stdin as the input file"
+
+#: src/rawflt2u1.c:502
+msgid "couldn't allocate a transformation table"
+msgstr "couldn't allocate a transformation table"
+
+#: src/rawflt2u1.c:531
+#, c-format
+msgid "error parsing line%s"
+msgstr "error parsing line%s"
+
+#: src/rawflt2u1.c:532
+msgid ": garbage found"
+msgstr ": garbage found"
+
+#: src/rawflt2u1.c:563
+msgid "processing standard input...\n"
+msgstr "processing standard input...\n"
+
+#: src/rawflt2u1.c:565
+#, c-format
+msgid "processing `%s'...\n"
+msgstr "processing ‘%s’...\n"

@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: Ivan Shmakov <ivan@theory.asu.ru>\n"
+"POT-Creation-Date: 2006-07-17 12:09+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/rawflt2u1.c:4
+msgid "Convert `float' stream into `uint8_t' one"
+msgstr ""
+
+#: src/rawflt2u1.c:17
+msgid ""
+"Copyright (C) 2006 Ivan Shmakov\n"
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+msgstr ""
+
+#: src/rawflt2u1.c:285
+msgid "specifying the transformation table"
+msgstr ""
+
+#: src/rawflt2u1.c:288
+msgid "pre-multiply the table boundaries with the inverse of this value"
+msgstr ""
+
+#: src/rawflt2u1.c:291
+msgid "pre-multiply the table values with the inverse of this value"
+msgstr ""
+
+#: src/rawflt2u1.c:295
+msgid "append the contents of the file to the transformation table"
+msgstr ""
+
+#: src/rawflt2u1.c:297
+msgid ""
+"append ENTRY to the transformation table; ENTRY is a pair of floats "
+"separated by a comma"
+msgstr ""
+
+#: src/rawflt2u1.c:299
+msgid "miscellaneous"
+msgstr ""
+
+#: src/rawflt2u1.c:301
+msgid "select input format, which may be `float' (default) or `double'"
+msgstr ""
+
+#: src/rawflt2u1.c:304
+msgid "use interpolation TYPE, which may be `none' (default) or `linear'"
+msgstr ""
+
+#: src/rawflt2u1.c:307
+msgid "output the result to this file instead of stdout"
+msgstr ""
+
+#: src/rawflt2u1.c:309
+msgid "explain what is being done"
+msgstr ""
+
+#: src/rawflt2u1.c:368
+#, c-format
+msgid "invalid argument `%s' for `%s'; should be a float"
+msgstr ""
+
+#: src/rawflt2u1.c:380
+#, c-format
+msgid "couldn't handle file name `%s'"
+msgstr ""
+
+#: src/rawflt2u1.c:389
+#, c-format
+msgid "invalid entry `%s'; should be `FLOAT, FLOAT'"
+msgstr ""
+
+#: src/rawflt2u1.c:395
+#, c-format
+msgid "couldn't handle entry `%s'"
+msgstr ""
+
+#: src/rawflt2u1.c:405
+#, c-format
+msgid ""
+"invalid argument `%s' for `--interpolation'; should be `none' or `linear'"
+msgstr ""
+
+#: src/rawflt2u1.c:419
+#, c-format
+msgid "invalid argument `%s' for `--format'; should be `float' or `double'"
+msgstr ""
+
+#: src/rawflt2u1.c:438
+msgid "couldn't store non-option arguments"
+msgstr ""
+
+#: src/rawflt2u1.c:447
+msgid "couldn't set stdin as the input file"
+msgstr ""
+
+#: src/rawflt2u1.c:502
+msgid "couldn't allocate a transformation table"
+msgstr ""
+
+#: src/rawflt2u1.c:531
+#, c-format
+msgid "error parsing line%s"
+msgstr ""
+
+#: src/rawflt2u1.c:532
+msgid ": garbage found"
+msgstr ""
+
+#: src/rawflt2u1.c:563
+msgid "processing standard input...\n"
+msgstr ""
+
+#: src/rawflt2u1.c:565
+#, c-format
+msgid "processing `%s'...\n"
+msgstr ""

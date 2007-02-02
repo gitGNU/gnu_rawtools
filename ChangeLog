@@ -1,0 +1,22 @@
+2006-07-17  Ivan Shmakov  <ivan@theory.asu.ru>
+
+	* lib/p_arg.c, lib/p_arg.h, lib/usemacro.h, lib/xform.c,
+	  lib/xform.h, src/Makefile.am, src/rawflt2u1.c: Various fixes and
+	  improvements.
+
+	* lib/gettext.h, po/LINGUAS, po/Makevars, po/POTFILES.in,
+	  po/rawtools.pot, po/ru.po: Added files.
+
+2006-07-17  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (ACLOCAL_AMFLAGS): New variable.
+
+	* m4/ChangeLog, m4/Makefile.am, po/ChangeLog, po/en@boldquot.po,
+	  po/en@quot.po: Added files.
+
+2006-07-16  Ivan Shmakov  <ivan@theory.asu.ru>
+
+	* AUTHORS, ChangeLog, Makefile.am, NEWS, README, configure.ac,
+	  lib/Makefile.am, lib/p_arg.c, lib/p_arg.h, lib/usemacro.h,
+	  lib/xform.c, lib/xform.h, src/Makefile.am, src/rawflt2u1.c:
+	  Added files.

@@ -1,0 +1,140 @@
+# Локализация rawtools.
+# This file is put in the public domain.
+# Ivan Shmakov <ivan@theory.asu.ru>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: rawtools 0.1\n"
+"Report-Msgid-Bugs-To: Ivan Shmakov <ivan@theory.asu.ru>\n"
+"POT-Creation-Date: 2006-07-17 12:09+0700\n"
+"PO-Revision-Date: 2006-07-17 12:12+0700\n"
+"Last-Translator: Ivan Shmakov <ivan@theory.asu.ru>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/rawflt2u1.c:4
+msgid "Convert `float' stream into `uint8_t' one"
+msgstr "Преобразовывает float-поток в поток беззнаковых 8-битных целых"
+
+#: src/rawflt2u1.c:17
+msgid ""
+"Copyright (C) 2006 Ivan Shmakov\n"
+"This is free software; see the source for copying conditions.  There is NO\n"
+"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n"
+msgstr ""
+"Copyright (C) 2006 Ivan Shmakov\n"
+"Это свободная программа; подробности об условиях распространения\n"
+"смотрите в исходном тексте.  НЕ предоставляется гарантий; даже гарантий\n"
+"КОММЕРЧЕСКОЙ ПРИГОДНОСТИ или ПРИГОДНОСТИ ДЛЯ КАКОЙ-ЛИБО ЦЕЛИ.\n"
+
+#: src/rawflt2u1.c:285
+msgid "specifying the transformation table"
+msgstr "задание таблицы преобразования"
+
+#: src/rawflt2u1.c:288
+msgid "pre-multiply the table boundaries with the inverse of this value"
+msgstr ""
+
+#: src/rawflt2u1.c:291
+msgid "pre-multiply the table values with the inverse of this value"
+msgstr ""
+
+#: src/rawflt2u1.c:295
+msgid "append the contents of the file to the transformation table"
+msgstr "добавить содержимое файла к таблице преобразования"
+
+#: src/rawflt2u1.c:297
+msgid ""
+"append ENTRY to the transformation table; ENTRY is a pair of floats "
+"separated by a comma"
+msgstr ""
+"добавить ENTRY к таблице преобразования; ENTRY должна состоять из двух "
+"действительных чисел, разделенных запятой"
+
+#: src/rawflt2u1.c:299
+msgid "miscellaneous"
+msgstr "прочие параметры"
+
+#: src/rawflt2u1.c:301
+msgid "select input format, which may be `float' (default) or `double'"
+msgstr ""
+"задать формат входных данных, может быть `float' (по-умолчанию), или `double'"
+
+#: src/rawflt2u1.c:304
+msgid "use interpolation TYPE, which may be `none' (default) or `linear'"
+msgstr ""
+"использовать заданную интерполяцию, может быть `none' (по-умолчанию) или "
+"`linear'"
+
+#: src/rawflt2u1.c:307
+msgid "output the result to this file instead of stdout"
+msgstr "выводить результат в файл, вместо стандартного вывода"
+
+#: src/rawflt2u1.c:309
+msgid "explain what is being done"
+msgstr "пояснять, что будет сделано"
+
+#: src/rawflt2u1.c:368
+#, c-format
+msgid "invalid argument `%s' for `%s'; should be a float"
+msgstr "неверный аргумент `%s' для `%s'; должно быть число с плавающей точкой"
+
+#: src/rawflt2u1.c:380
+#, c-format
+msgid "couldn't handle file name `%s'"
+msgstr "не могу обработать имя файла `%s'"
+
+#: src/rawflt2u1.c:389
+#, c-format
+msgid "invalid entry `%s'; should be `FLOAT, FLOAT'"
+msgstr "неверный формат данных для таблицы `%s'; должен быть `ЧИСЛО, ЧИСЛО'"
+
+#: src/rawflt2u1.c:395
+#, c-format
+msgid "couldn't handle entry `%s'"
+msgstr "не могу обработать строку `%s'"
+
+#: src/rawflt2u1.c:405
+#, c-format
+msgid ""
+"invalid argument `%s' for `--interpolation'; should be `none' or `linear'"
+msgstr ""
+"неверный аргумент `%s' для `--interpolation'; должен быть `none' или `linear'"
+
+#: src/rawflt2u1.c:419
+#, c-format
+msgid "invalid argument `%s' for `--format'; should be `float' or `double'"
+msgstr ""
+"неверный аргумент `%s' для `--format'; должен быть `float' или `double'"
+
+#: src/rawflt2u1.c:438
+msgid "couldn't store non-option arguments"
+msgstr "не могу сохранить обязательные аргументы"
+
+#: src/rawflt2u1.c:447
+msgid "couldn't set stdin as the input file"
+msgstr "не могу указать стандартный ввод в качестве входного файла"
+
+#: src/rawflt2u1.c:502
+msgid "couldn't allocate a transformation table"
+msgstr "не могу выделить память под таблицу преобразования"
+
+#: src/rawflt2u1.c:531
+#, c-format
+msgid "error parsing line%s"
+msgstr "ошибка разбора строки%s"
+
+#: src/rawflt2u1.c:532
+msgid ": garbage found"
+msgstr ": несоответствие формату"
+
+#: src/rawflt2u1.c:563
+msgid "processing standard input...\n"
+msgstr "обрабатывается стандартный ввод...\n"
+
+#: src/rawflt2u1.c:565
+#, c-format
+msgid "processing `%s'...\n"
+msgstr "обрабатывается `%s'...\n"

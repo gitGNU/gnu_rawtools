@@ -1,0 +1,80 @@
+    Rawtools is the package dedicated to the processing of the so-called
+    ``raw'' data files, i. e., the files without any header information
+    contained inside of them.  This package is to facilitate some common
+    tasks on raw data files, such as conversion, partitioning, etc.
+
+* On raw data formats
+
+    Raw data format is sometimes used in scientific or engineering
+    tasks.  E. g., the MODIS Swath-to-Grid Toolbox (MS2GT) programs
+    ``fornav'' and ``ll2cr'' both use raw data files as input and as
+    output.  The files consist of nothing but the numbers
+    (floating-point or integer) in the same form they're stored in
+    machine's memory.
+
+    Primary advantage of such raw data formats is the high processing
+    speed: there's no need to convert raw data to or from machine's
+    representation on reading or writing.  Also, floating-point numbers
+    converted to text strings might suffer from loss of precision, and
+    generally the raw formats are more storage-efficient than text ones.
+
+    Primary disadvantage of these formats is their non-portability:
+    different kinds of machines may have different binary
+    representations for the same data.
+
+* The tools
+
+    Currently, the package includes only one tool: `rawflt2u1', which
+    converts the stream of `float's (or `double's) into stream of
+    unsigned 8-bit integers, applying table transformation (see below)
+    in midway.
+
+    This tool could be used, e. g., in producing MODIS true color images
+    (see: http://cimss.ssec.wisc.edu/~gumley/IMAPP/).  Together with
+    Netpbm tools, it could be something like (where band-{1,4,3}.dat
+    files are provided by `fornav'):
+
+$ cat table
+nan     0
+0.      0
+0.12941 110
+0.25882 160
+0.51765 210
+0.81961 240
+1.1     255
+$ for band in 1 4 3; do
+      rawflt2u1 -I linear -f table band-$f.dat \
+          | rawtoppm WIDTH HEIGHT > band-$f.pgm
+  done
+$ rgb3toppm band-{1,4,3}.pgm > true-color.ppm
+$ 
+
+    The table used above is, actually, the table recommended in
+    ``Producing MODIS True Color Images'' tutorial (link available on
+    the page above), but with left bounds (first column) multiplied by
+    the value of 1.1 / 255.
+
+    The program is locale-aware, which requires you to use whichever
+    numerical notation your locale has, or to ensure that `LC_NUMERIC'
+    locale category is set to `C'.
+
+* Transformation tables
+
+    Transformation table consists of the pairs of values: the left bound
+    and the value.  When no interpolation selected, every value between
+    some left bound (inclusive) and its successor is mapped to the value
+    corresponding to the former.  Linear interpolation is done in
+    obvious manner.  One more value in the table is the ``NaN value'' to
+    which all `NaN's are mapped.  It could be set by specifying the left
+    bound of `nan'.  The `NaN's are mapped to `NaN's by default.  Values
+    less than the least left bound are mapped to negative infinity
+    (`-inf') by default.
+
+    Table transformation is performed on `double's.  When output format
+    isn't `double' (e. g. in `rawflt2u1'), the values are firstly
+    converted to the destination format, with out-of-range values mapped
+    to the least and the most values representable in the destination
+    format.  Rounding mode is unspecified.  Mapping of `NaN's is
+    unspecified if the format doesn't support them.
+
+    Ivan Shmakov <ivan@theory.asu.ru>
