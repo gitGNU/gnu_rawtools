@@ -597,9 +597,9 @@ main (int argc, char **argv)
 /** Local variables: */
 /** fill-column: 72 */
 /** indent-tabs-mode: nil */
-/** ispell-local-dictionary: "english" */
+/** ispell-local-dictionary: "british" */
 /** mode: outline-minor */
-/** outline-regexp: "[/]\\*\\*\\*" */
+/** outline-regexp: "/[*][*][*]" */
 /** End: */
 /** LocalWords:   */
 /*** rawflt2u1.c ends here */

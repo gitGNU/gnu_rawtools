@@ -30,9 +30,9 @@ extern const void *oalist_search (struct oalist *list,
 /** Local variables: */
 /** fill-column: 72 */
 /** indent-tabs-mode: nil */
-/** ispell-local-dictionary: "english" */
+/** ispell-local-dictionary: "british" */
 /** mode: outline-minor */
-/** outline-regexp: "[/]\\*\\*\\*" */
+/** outline-regexp: "/[*][*][*]" */
 /** End: */
 /** LocalWords:   */
 /*** oalist.h ends here */

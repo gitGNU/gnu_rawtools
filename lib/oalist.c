@@ -193,9 +193,9 @@ oalist_search (struct oalist *list, const void *value)
 /** Local variables: */
 /** fill-column: 72 */
 /** indent-tabs-mode: nil */
-/** ispell-local-dictionary: "english" */
+/** ispell-local-dictionary: "british" */
 /** mode: outline-minor */
-/** outline-regexp: "[/]\\*\\*\\*" */
+/** outline-regexp: "/[*][*][*]" */
 /** End: */
 /** LocalWords:   */
 /*** oalist.c ends here */
