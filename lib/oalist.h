@@ -1,5 +1,4 @@
 /*** oalist.h --- ?  -*- C -*- */
-/** $Id: oalist.h,v 1.1 2007/02/04 15:03:56 ivan Exp $ */
 
 /*** Copyright (C) 2006 Ivan Shmakov */
 

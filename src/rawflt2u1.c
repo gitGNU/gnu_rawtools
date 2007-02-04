@@ -1,5 +1,4 @@
 /*** rawflt2u1.c --- Convert `float' stream into `uint8_t' one  -*- C -*- */
-/** $Id: rawflt2u1.c,v 1.5 2006/07/17 10:01:48 ivan Exp $ */
 #define _GNU_SOURCE
 #include "config.h"
 #include "gettext.h"

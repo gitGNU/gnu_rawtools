@@ -1,5 +1,4 @@
 /*** p_arg.h --- Common parsing routines  -*- C -*- */
-/** $Id: p_arg.h,v 1.2 2006/07/17 05:17:50 ivan Exp $ */
 
 /*** Copyright (C) 2006 Ivan Shmakov */
 

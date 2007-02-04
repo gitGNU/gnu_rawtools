@@ -1,5 +1,4 @@
 /*** usemacro.h --- Useful Macros  -*- C -*- */
-/** $Id: usemacro.h,v 1.1 2006/07/16 17:01:31 ivan Exp $ */
 
 /*** Copyright (C) 2006 Ivan Shmakov */
 

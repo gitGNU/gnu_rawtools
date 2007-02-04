@@ -1,5 +1,4 @@
 /*** oalist.c --- Simple Ordered Association Lists  -*- C -*- */
-/** $Id: oalist.c,v 1.1 2007/02/04 15:04:15 ivan Exp $ */
 
 /*** Copyright (C) 2006 Ivan Shmakov */
 

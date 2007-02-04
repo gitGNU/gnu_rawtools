@@ -1,5 +1,4 @@
 /*** xform.c --- Perform some simple data transformations  -*- C -*- */
-/** $Id: xform.c,v 1.2 2006/07/16 17:12:12 ivan Exp $ */
 
 /*** Copyright (C) 2006 Ivan Shmakov */
 
