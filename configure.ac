@@ -27,11 +27,12 @@ AC_CHECK_FUNCS([setlocale strtol])
 AC_OUTPUT
 
 ## I18n
-AM_GNU_GETTEXT([external])
-AM_GNU_GETTEXT_VERSION([0.14.2])
+AM_GNU_GETTEXT()
+AM_GNU_GETTEXT_VERSION([0.14.4])
 
 ## Output
 AC_CONFIG_FILES([Makefile
+                 intl/Makefile
                  lib/Makefile
                  m4/Makefile
                  po/Makefile.in
