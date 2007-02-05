@@ -1,4 +1,4 @@
 
 noinst_LIBRARIES = librawtools.a
 
-librawtools_a_SOURCES = p_arg.c xform.c
+librawtools_a_SOURCES = p_arg.c useutil.c xform.c
