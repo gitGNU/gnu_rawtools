@@ -32,7 +32,7 @@ AM_GNU_GETTEXT_VERSION([0.14.4])
 
 ## Output
 AC_CONFIG_FILES([Makefile
-                 intl/Makefile
+                 intl/Makefile:intl/Makefile.inx
                  lib/Makefile
                  m4/Makefile
                  po/Makefile.in
