@@ -240,6 +240,7 @@ p_opt (int key, char *arg, struct argp_state *state)
              rest > 0;
              rest--, *(p++) = value)
           ;
+        args->block_sizes_size = files;
       }
     }
     break;
@@ -341,7 +342,7 @@ main (int argc, char **argv)
            ! done_p; ) {
         if (rest_bytes > 0) {
           /* do nothing */
-        } else if (fp++, np++, --rest_files > 0) {
+        } else if (fp++, sp++, np++, --rest_files > 0) {
           /* do nothing */
         } else if (eof_p) {
           done_p = 1;
@@ -394,17 +395,19 @@ main (int argc, char **argv)
         const char **np;
         FILE **fp;
         int neofs;
-        const char *last;
+        const char *last = 0;
         for (rest = noas_count, np = names->s, fp = noas, neofs = 0;
              rest > 0;
              rest--, np++, fp++) {
           if (! feof (*fp)) {
             error (0, 0, _("Warning: `%s' is not at EOF"), *np);
             neofs++;
+          } else {
             last = *np;
           }
         }
         if (neofs == 1) {
+          assert (last != 0);
           error (0, 0, _("Warning: `%s' ended prematurely"), last);
         }
         if (neofs) {
