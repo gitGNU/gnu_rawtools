@@ -286,16 +286,19 @@ main (int argc, char **argv)
     argp_parse (&argp, argc, argv, 0, 0, &args);
   }
 
+  /* determine mode */
+  interleave_p = (args.input_file == 0);
+
   {
+    const int input_p = ! interleave_p;
     const char *fn;
 
-    /* determine mode */
-    interleave_p = (args.input_file == 0);
+    /* determine ``the file'' */
     fn = (interleave_p ? args.output_file : args.input_file);
     if (fn == 0) { fn = "-"; }
 
     /* open the [-i|-o] file */
-    if ((the_file = open_file (fn, 0)) == 0) {
+    if ((the_file = open_file (fn, input_p)) == 0) {
       error (1, errno, "%s", fn);
     }
   }
@@ -422,7 +425,7 @@ main (int argc, char **argv)
       error (1, 0, _("de-interleave mode is not implemented"));
     }
 
-    /* close the files */
+    /* close the files (NB: not necessary) */
     close_files (noas, noas_count);
   }
 
