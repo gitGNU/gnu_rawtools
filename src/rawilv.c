@@ -507,7 +507,6 @@ main (int argc, char **argv)
           error (1, errno, "%s", *np);
         }
       }
-      error (1, 0, _("de-interleave mode is not implemented"));
     }
 
     /* close the files (NB: not necessary) */
