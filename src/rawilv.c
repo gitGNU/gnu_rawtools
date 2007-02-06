@@ -419,9 +419,94 @@ main (int argc, char **argv)
         }
       }
     } else {
-      char buf[BUF_SZ];
+      const size_t buf_alloc = BUF_SZ;
+      const off_t *sizes = args.block_sizes;
+      char *bufs[noas_count];
+      char *bps[noas_count];
+      char **bp0, **bp;
+      int eof_p;
+      size_t rest_files;
+      off_t rest_bytes;
+      FILE **fp;
+      const off_t *sp;
+      const char **np;
 
-      /* FIXME: write it! */
+      assert (args.block_sizes_size == noas_count);
+
+      /* initialize buffer pointers */
+      for (rest_files = noas_count, bp = bps, bp0 = bufs;
+           rest_files > 0;
+           rest_files--, *(bp++) = *(bp0++)) {
+        if (MALLOC_ARY (*bp0, buf_alloc) == 0) {
+          error (1, errno, "error allocating output buffers");
+        }
+      }
+
+      for (eof_p = 0,
+             bp = bps, bp0 = bufs,
+             np = names->s,
+             fp = noas,  rest_files = noas_count,
+             sp = sizes, rest_bytes = *sp;
+           ! eof_p; ) {
+        if (rest_bytes > 0) {
+          /* do nothing */
+        } else if (fp++, sp++, bp++, bp0++, np++,
+                   --rest_files > 0) {
+          /* do nothing */
+        } else {
+          bp = bps, bp0 = bufs;
+          np = names->s;
+          fp = noas,  rest_files = noas_count;
+          sp = sizes, rest_bytes = *sp;
+        }
+        {
+          const char *input_file = args.input_file;
+          size_t rv;
+          const size_t buf_size = *bp - *bp0;
+          size_t to_read = MIN (*sp, buf_alloc - buf_size);
+
+          assert (to_read > 0);
+          if ((rv = fread (*bp, 1, to_read, the_file),
+               *bp += rv, rest_bytes -= rv, rv)
+              == to_read) {
+            /* do nothing */
+          } else if (! feof (the_file)) {
+            /* reading error */
+            error (1, errno, "%s", input_file);
+          } else if (rv != 0 && rest_bytes > 0) {
+            error (1, 0, _("%s: EOF in the middle of the block"),
+                   input_file);
+          } else if (rv != 0 && rest_files > 1) {
+            /* FIXME: more clean message */
+            error (1, 0, _("%s: EOF between the files"),
+                   input_file);
+          } else {
+            eof_p = 1;
+            continue;
+          }
+          if (*bp - *bp0 < buf_alloc) {
+            /* do nothing */
+          } else if ((fwrite (*bp0, 1, buf_alloc, *fp))
+                     != buf_alloc) {
+            error (1, errno, "%s", *np);
+          } else {
+            *bp = *bp0;
+          }
+        }
+      }
+
+      for (bp = bps, bp0 = bufs,
+             np = names->s,
+             fp = noas,  rest_files = noas_count;
+           rest_files > 0;
+           bp++, bp0++, np++, fp++, rest_files--) {
+        if (*bp <= *bp0) {
+          /* do nothing */
+        } else if ((fwrite (*bp0, 1, (*bp - *bp0), *fp))
+                   != (*bp - *bp0)) {
+          error (1, errno, "%s", *np);
+        }
+      }
       error (1, 0, _("de-interleave mode is not implemented"));
     }
 
