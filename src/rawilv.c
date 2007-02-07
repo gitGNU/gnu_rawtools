@@ -346,7 +346,7 @@ main (int argc, char **argv)
         if (rest_bytes > 0) {
           /* do nothing */
         } else if (fp++, sp++, np++, --rest_files > 0) {
-          /* do nothing */
+          rest_bytes = *sp;
         } else if (eof_p) {
           done_p = 1;
           continue;
@@ -358,10 +358,10 @@ main (int argc, char **argv)
         {
           size_t rv;
           const size_t buf_size = bp - buf;
-          size_t to_read = MIN (*sp, sizeof (buf) - buf_size);
+          size_t to_read = MIN (rest_bytes, sizeof (buf) - buf_size);
 
           assert (to_read > 0);
-          if ((rv = fread (buf + buf_size, 1, to_read, *fp),
+          if ((rv = fread (bp, 1, to_read, *fp),
                bp += rv, rest_bytes -= rv, rv)
               == to_read) {
             /* do nothing */
@@ -381,6 +381,8 @@ main (int argc, char **argv)
           } else if ((fwrite (buf, 1, sizeof (buf), the_file))
                      != sizeof (buf)) {
             error (1, errno, "%s", args.output_file);
+          } else {
+            bp = buf;
           }
         }
       }
@@ -452,7 +454,7 @@ main (int argc, char **argv)
           /* do nothing */
         } else if (fp++, sp++, bp++, bp0++, np++,
                    --rest_files > 0) {
-          /* do nothing */
+          rest_bytes = *sp;
         } else {
           bp = bps, bp0 = bufs;
           np = names->s;
@@ -463,7 +465,7 @@ main (int argc, char **argv)
           const char *input_file = args.input_file;
           size_t rv;
           const size_t buf_size = *bp - *bp0;
-          size_t to_read = MIN (*sp, buf_alloc - buf_size);
+          size_t to_read = MIN (rest_bytes, buf_alloc - buf_size);
 
           assert (to_read > 0);
           if ((rv = fread (*bp, 1, to_read, the_file),
