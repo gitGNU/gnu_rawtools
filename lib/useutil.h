@@ -29,7 +29,7 @@ void close_file (FILE *fp);
 /** Local variables: */
 /** fill-column: 72 */
 /** indent-tabs-mode: nil */
-/** ispell-local-dictionary: "english" */
+/** ispell-local-dictionary: "british" */
 /** mode: outline-minor */
 /** outline-regexp: "/[*][*][*]" */
 /** End: */
