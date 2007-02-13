@@ -1,18 +1,18 @@
-/*** rawflt2u1.c --- Convert `float' stream into `uint8_t' one  -*- C -*- */
+/*** rawxform.c --- Apply table transformation  -*- C -*- */
 #define _GNU_SOURCE
 #include "config.h"
 #include "gettext.h"
 #define _(string) gettext (string)
 #define N_(string) gettext_noop (string)
-static const char doc[] = N_("Convert `float' stream into `uint8_t' one");
+static const char doc[] = N_("Apply table transformation");
 static const char args_doc[] = "[FILE]...";
 
-/*** Copyright (C) 2006 Ivan Shmakov */
+/*** Copyright (C) 2006, 2007 Ivan Shmakov */
 
 const char *
 program_copyright (void)
 {
-  return _("Copyright (C) 2006 Ivan Shmakov\n"
+  return _("Copyright (C) 2006, 2007 Ivan Shmakov\n"
            "This is free software; see the source for copying"
            " conditions.  There is NO\n"
            "warranty; not even for MERCHANTABILITY or FITNESS FOR A"
@@ -21,6 +21,7 @@ program_copyright (void)
 
 /*** Code: */
 #include <argp.h>
+#include <assert.h>
 #include <errno.h>
 #include <error.h>
 #include <locale.h>
@@ -30,6 +31,7 @@ program_copyright (void)
 #include <stdlib.h>
 #include <string.h>
 
+#include "numconv.h"
 #include "p_arg.h"
 #include "usemacro.h"
 #include "useutil.h"
@@ -51,18 +53,6 @@ program_copyright (void)
 #endif
 
 /*** Utility */
-
-static void
-doubles_from_floats (double *dst, const float *src, size_t count)
-{
-  size_t rest;
-  double *dp;
-  const float *sp;
-  for (rest = count, dp = dst, sp = src;
-       rest > 0;
-       rest--, *(dp++) = *(sp++))
-    ;
-}
 
 static void
 uint8s_from_doubles (uint8_t *dst, const double *src, size_t count)
@@ -117,34 +107,60 @@ load_table (struct xform_table *table, FILE *fp,
 }
 
 enum flt_format {
-  FORMAT_FLOAT = 0,
+  FORMAT_UINT8 = 0,
+  FORMAT_FLOAT,
   FORMAT_DOUBLE
 };
 
 static int
 apply_table (FILE *out, struct xform_table *table,
-             enum flt_format fmt, FILE *in)
+             enum flt_format fmt, enum flt_format out_fmt,
+             FILE *in)
 {
   float   buf_1[BUF_SZ];
   double  buf_inter[BUF_SZ];
-  uint8_t buf_out[BUF_SZ];
   void    *buf_in
     = (fmt == FORMAT_FLOAT) ?  (void *)buf_1  :  (void *)buf_inter;
   size_t  in_elt_sz
     = (fmt == FORMAT_FLOAT) ? sizeof (*buf_1) : sizeof (*buf_inter);
   size_t  count;
 
+  assert (fmt == FORMAT_FLOAT || fmt == FORMAT_DOUBLE);
+  assert (out_fmt == FORMAT_UINT8
+          || out_fmt == FORMAT_FLOAT || out_fmt == FORMAT_DOUBLE);
   while ((count = fread (buf_in, in_elt_sz, BUF_SZ, in))
          > 0) {
     size_t count_w;
     if (fmt == FORMAT_FLOAT) {
-      doubles_from_floats (buf_inter, buf_1, count);
+      nconv_double_from_float (buf_inter, buf_1, count);
     }
     xform_table_apply (table, buf_inter, buf_inter, count);
-    uint8s_from_doubles (buf_out, buf_inter, count);
-    if ((count_w = fwrite ((void *)buf_out, sizeof (*buf_out),
-                           count, out))
-        != count) {
+    switch (out_fmt) {
+    case FORMAT_UINT8:
+      {
+        uint8_t obuf[BUF_SZ];
+        uint8s_from_doubles (obuf, buf_inter, count);
+        count_w = fwrite ((void *)obuf, sizeof (*obuf), count, out);
+      }
+      break;
+    case FORMAT_FLOAT:
+      {
+        float obuf[BUF_SZ];
+        nconv_float_from_double (obuf, buf_inter, count);
+        count_w = fwrite ((void *)obuf, sizeof (*obuf), count, out);
+      }
+      break;
+    case FORMAT_DOUBLE:
+      count_w = fwrite ((void *)buf_inter, sizeof (*buf_inter), count,
+                        out);
+      break;
+    default:
+      /* NB: should not happen */
+      error (1, 0, "%s:%d: unhandled output format",
+             __FUNCTION__, out_fmt);
+      break;
+    }
+    if (count_w != count) {
       /* . */
       return -1;
     }
@@ -165,7 +181,7 @@ const char *
 program_version (void)
 {
   return
-    "rawflt2u1 " PACKAGE_NAME " " PACKAGE_VERSION;
+    "rawxform " PACKAGE_NAME " " PACKAGE_VERSION;
 }
 
 static void
@@ -198,6 +214,7 @@ const char *interp_opts[] = {
 };
 
 const char *format_opts[] = {
+  [FORMAT_UINT8]  = "uint8",
   [FORMAT_FLOAT]  = "float",
   [FORMAT_DOUBLE] = "double"
 };
@@ -219,8 +236,11 @@ static struct argp_option p_opts[] = {
        " ENTRY is a pair of floats separated by a comma") },
   { 0, 0, 0, 0, /***/ N_("miscellaneous") },
   { "format",           't', "TYPE", 0,
-    N_("select input format, which may be `float' (default)"
-       " or `double'") },
+    N_("select input format, which may be"
+       " `float' or `double' (default)") },
+  { "output-format",    'T', "TYPE", 0,
+    N_("select output format, which may be `uint8',"
+       " `float' or `double' (default)") },
   { "interpolate",      'I', "TYPE", 0,
     N_("use interpolation TYPE, which may be `none' (default)"
        " or `linear'") },
@@ -238,6 +258,7 @@ struct p_args {
 #endif
   int interpolation;
   int input_format;
+  int output_format;
   const char *output_file;
   struct strings table_files;
   struct xform_table *x_table;
@@ -341,7 +362,8 @@ p_opt (int key, char *arg, struct argp_state *state)
   case 't':
     {
       int i;
-      if ((i = p_arg_string (arg, format_opts, 0)) < 0) {
+      if ((i = p_arg_string (arg, format_opts, 0)) < 0
+          && i != FORMAT_DOUBLE && i != FORMAT_FLOAT) {
         argp_error (state,
                     N_("invalid argument `%s' for `--format';"
                        " should be `float' or `double'"),
@@ -350,6 +372,20 @@ p_opt (int key, char *arg, struct argp_state *state)
         return EINVAL;
       }
       args->input_format = i;
+    }
+    break;
+  case 'T':
+    {
+      int i;
+      if ((i = p_arg_string (arg, format_opts, 0)) < 0) {
+        argp_error (state,
+                    N_("invalid argument `%s' for `--format';"
+                       " should be `uint8', `float' or `double'"),
+                    arg);
+        /* . */
+        return EINVAL;
+      }
+      args->output_format = i;
     }
     break;
   case 'o':
@@ -403,7 +439,8 @@ main (int argc, char **argv)
     DFL_OUTPUT_MULT,
 #endif
     INTERP_NONE,
-    FORMAT_FLOAT,
+    FORMAT_DOUBLE,
+    FORMAT_DOUBLE,
     "-",
     { 0, 0, 0 },
     0,
@@ -498,7 +535,9 @@ main (int argc, char **argv)
         else
           fprintf (stderr, _("processing `%s'...\n"), *np);
       }
-      if (apply_table (output, table, args.input_format, fp) < 0) {
+      if (apply_table (output, table,
+                       args.input_format, args.output_format,
+                       fp) < 0) {
         error (1, errno, "%s", *np);
       }
       if (fp != stdin)
@@ -522,4 +561,4 @@ main (int argc, char **argv)
 /** outline-regexp: "/[*][*][*]" */
 /** End: */
 /** LocalWords:   */
-/*** rawflt2u1.c ends here */
+/*** rawxform.c ends here */
