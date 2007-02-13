@@ -254,11 +254,13 @@ struct p_args {
 static int
 handle_table_entry (struct p_args *args, const char *arg)
 {
+  int rv;
   int chars;
   struct xform_table_entry ent;
 
-  if (sscanf (arg, " %lf , %lf%n",
-              &ent.bound, &ent.value, &chars) != 3
+  if (rv = sscanf (arg, " %lf , %lf%n",
+                   &ent.bound, &ent.value, &chars),
+      (rv != 2 && rv != 3)
       || arg[chars] != '\0') {
     errno = EINVAL;
     /* . */
