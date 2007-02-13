@@ -32,6 +32,9 @@ extern void xform_table_oor_set (struct xform_table *table,
 extern void xform_table_no_interp (struct xform_table *table);
 extern int  xform_table_linear_interp (struct xform_table *table);
 
+/** obtaining number of table entries */
+extern size_t xform_table_size (const struct xform_table *table);
+
 /** clearing and filling the table */
 extern void xform_table_clear (struct xform_table *table);
 extern int  xform_table_append (struct xform_table *table,

@@ -197,6 +197,13 @@ xform_table_grow_by (struct xform_table *t, size_t by)
     && xform_table_realloc (t, MAX (new, t->alloc + min_grow));
 }
 
+size_t
+xform_table_size (const struct xform_table *table)
+{
+  /* . */
+  return table->size;
+}
+
 void
 xform_table_clear (struct xform_table *table)
 {
