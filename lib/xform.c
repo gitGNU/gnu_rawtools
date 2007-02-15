@@ -302,6 +302,25 @@ xform_table_apply (const struct xform_table *table,
     range_v = table->range_value,
     nan_v   = table->nan_value;
 
+  if (table->size > 0) {
+    /* do nothing */
+#ifdef NAN
+  } else if (! isnan (nan_v)) {
+    for (rest = size, dst = to, src = from;
+         rest > 0;
+         rest--, dst++, src++) {
+      double v = *src;
+      *dst = isnan (v) ? nan_v : v;
+    }
+    /* . */
+    return;
+#endif
+  } else {
+    COPY_ARY (to, from, size);
+    /* . */
+    return;
+  }
+
   for (rest = size, dst = to, src = from;
        rest > 0;
        rest--, dst++, src++) {
