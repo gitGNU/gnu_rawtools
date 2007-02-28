@@ -19,6 +19,12 @@ struct parse_elt_integer_param {
   int base;
 };
 
+struct parse_elt_of_strings_param {
+  const char *const *tokens;
+  int skip_whitespace_after_p;
+  int skip_whitespace_before_p;
+};
+
 /** Parsing single elements */
 
 int parse_elt_long (const char *string, long *buf, char **tailptr,
@@ -32,6 +38,14 @@ int parse_elt_llong (const char *string, long long *buf,
 int parse_elt_ullong (const char *string, unsigned long long *buf,
                       char **tailptr,
                       struct parse_elt_integer_param *param);
+
+int parse_elt_float  (const char *string, float  *buf, char **tailptr,
+                      struct parse_elt_number_param *param);
+int parse_elt_double (const char *string, double *buf, char **tailptr,
+                      struct parse_elt_number_param *param);
+int parse_elt_ldouble (const char *string, long double *buf,
+                       char **tailptr,
+                       struct parse_elt_number_param *param);
 
 /*** Loading arrays from delimited strings */
 
