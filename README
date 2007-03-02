@@ -1,16 +1,18 @@
     Rawtools is the package dedicated to the processing of the so-called
-    ``raw'' data files, i. e., the files without any header information
-    contained inside of them.  This package is to facilitate some common
-    tasks on raw data files, such as conversion, partitioning, etc.
+    ``raw'' data files, i. e., the files holding some machine
+    representation of the data, without any associated header
+    information contained inside of them.  This package is to facilitate
+    some common tasks on raw data files, such as format (representation)
+    conversion, partitioning, etc.
 
 * On raw data formats
 
-    Raw data format is sometimes used in scientific or engineering
+    Raw data format is sometimes used in scientific and engineering
     tasks.  E. g., the MODIS Swath-to-Grid Toolbox (MS2GT) programs
-    ``fornav'' and ``ll2cr'' both use raw data files as input and as
-    output.  The files consist of nothing but the numbers
-    (floating-point or integer) in the same form they're stored in
-    machine's memory.
+    ``fornav'' and ``ll2cr'' both use raw data files for input and
+    output.  The files consist of nothing but the machine representation
+    of the numbers (floating-point or integer) in the very same form
+    they're stored in machine's memory.
 
     Primary advantage of such raw data formats is the high processing
     speed: there's no need to convert raw data to or from machine's
@@ -20,19 +22,67 @@
 
     Primary disadvantage of these formats is their non-portability:
     different kinds of machines may have different binary
-    representations for the same data.
+    representations of the data.
 
 * The tools
 
-    Currently, the package includes only one tool: `rawflt2u1', which
-    converts the stream of `float's (or `double's) into stream of
-    unsigned 8-bit integers, applying table transformation (see below)
-    in midway.
+    Currently, the package includes three tools: `rawxform', `rawmatrix'
+    and `rawilv'.  First two operate on numeric data, while the last one
+    could operate on any binary stream.
 
-    This tool could be used, e. g., in producing MODIS true color images
-    (see: http://cimss.ssec.wisc.edu/~gumley/IMAPP/).  Together with
-    Netpbm tools, it could be something like (where band-{1,4,3}.dat
-    files are provided by `fornav'):
+    The first tool, `rawxform', applies the table transformation to the
+    stream of floating-point numbers, producing another stream of
+    numbers in the same or another machine format.  Currently, `float'
+    and `double' formats are allowed for input and output, and one more
+    format -- `uint8' (unsigned 8-bit integer) is allowed for
+    output-only.  (Primary cause for not supporting `uint8' for input is
+    the lack of a way to specify the `fill' value -- an `uint8' value to
+    be mapped to floating-point `NaN' value.)  The table transformations
+    are discussed below.  Specifying an empty table (the default) allows
+    one to convert representation of the data only.
+
+    The second, `rawmatrix', interprets the input stream as the sequence
+    of numeric vectors of equal length (only `double' format is
+    supported for now), by which the specified matrix is multiplied,
+    with the resulting vectors being the output.
+
+    Both of the programs mentioned above are locale-aware, which
+    requires you to use whichever numerical notation your locale uses,
+    or to ensure that the `LC_NUMERIC' locale category is set to `C'.
+
+    Finally, `rawilv' interleaves the data of an arbitrary number of
+    input streams to produce an output stream, or de-interleaves the
+    data of a sole input stream to produce output streams.  The data is
+    interpreted as the sequence of blocks of the sizes specified by the
+    `--block-sizes' (`-s') option.  If the number of sizes specified is
+    less than the number of inputs, the last size specified is used for
+    the rest of the inputs.  In particular, if only one size is
+    specified, it's used for all of the inputs.  By default, block size
+    is 1 byte.
+
+    The lengths of the input streams, counted in blocks, must match.  On
+    detecting end-of-file condition on some streams, but not the other,
+    the program signals an error.  An error is also signalled if a
+    reading error or end-of-file is occured in the middle of the block.
+
+** Examples
+
+    An unuseful example of using `rawilv' (please note that the newline
+    is one byte in length):
+
+$ cat a
+abc
+$ cat b
+ABC
+$ rawilv -s 2 a b
+abABc
+C
+$ 
+
+    These tools could be used, e. g., in producing MODIS true color
+    images (see: http://cimss.ssec.wisc.edu/~gumley/IMAPP/).  Together
+    with Netpbm tools, it could be something like the following (where
+    band-{1,4,3}.dat files are presumably produced by `fornav'):
 
 $ cat table
 nan     0
@@ -43,10 +93,12 @@ nan     0
 0.81961 240
 1.1     255
 $ for band in 1 4 3; do
-      rawflt2u1 -I linear -f table band-$f.dat \
-          | rawtoppm WIDTH HEIGHT > band-$f.pgm
+      rawxform -Ilinear -f table band-"$band".dat \
+          > band-"$band".u8.dat
   done
-$ rgb3toppm band-{1,4,3}.pgm > true-color.ppm
+$ rawilv band-1.u8.dat band-4.u8.dat band-3.u8.dat \
+      | rawtoppm WIDTH HEIGHT \
+      > true-color.ppm
 $ 
 
     The table used above is, actually, the table recommended in
@@ -54,15 +106,11 @@ $
     the page above), but with left bounds (first column) multiplied by
     the value of 1.1 / 255.
 
-    The program is locale-aware, which requires you to use whichever
-    numerical notation your locale has, or to ensure that `LC_NUMERIC'
-    locale category is set to `C'.
-
 * Transformation tables
 
     Transformation table consists of the pairs of values: the left bound
-    and the value.  When no interpolation selected, every value between
-    some left bound (inclusive) and its successor is mapped to the value
+    and the value.  When no interpolation specified, every value between
+    a left bound (inclusive) and its successor is mapped to the value
     corresponding to the former.  Linear interpolation is done in
     obvious manner.  One more value in the table is the ``NaN value'' to
     which all `NaN's are mapped.  It could be set by specifying the left
@@ -71,10 +119,10 @@ $
     (`-inf') by default.
 
     Table transformation is performed on `double's.  When output format
-    isn't `double' (e. g. in `rawflt2u1'), the values are firstly
-    converted to the destination format, with out-of-range values mapped
-    to the least and the most values representable in the destination
-    format.  Rounding mode is unspecified.  Mapping of `NaN's is
-    unspecified if the format doesn't support them.
+    isn't `double', the values are then converted to the destination
+    format, with out-of-range values mapped to the least and the most
+    values representable.  Rounding mode is unspecified.  Mapping of
+    `NaN's is unspecified if the destination format doesn't support
+    them.
 
     Ivan Shmakov <ivan@theory.asu.ru>
