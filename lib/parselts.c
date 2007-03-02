@@ -17,6 +17,10 @@
 typedef int (*strto_i_fn) (void *buf, const char *string,
                            char **tailptr, int base);
 
+/* a type representing a wrapper around a ``float'' `strto*' function */
+typedef int (*strto_f_fn) (void *buf, const char *string,
+                           char **tailptr);
+
 /*** Utility */
 
 /* FIXME: duplicates p_arg_skipspace () */
@@ -50,16 +54,36 @@ skip_space_after_a_number (const char *s,
       return v == -1 ? -1 : 0; \
     }
 
+#define STRTO_F_WRAP(fn, type, strtox) \
+    static int fn (type *buf, const char *string, \
+                   char **tailptr) \
+    { \
+      type v = strtox (string, tailptr); \
+      if (buf != 0) *buf = v; \
+      /* . */ \
+      return 0; \
+    }
+
 STRTO_I_WRAP (strtol_wrap,   long, strtol) ;
 STRTO_I_WRAP (strtoll_wrap,  long long, strtoll) ;
 STRTO_I_WRAP (strtoul_wrap,  unsigned long, strtoul) ;
 STRTO_I_WRAP (strtoull_wrap, unsigned long long, strtoull) ;
+
+STRTO_F_WRAP (strtof_wrap,   float, strtof) ;
+STRTO_F_WRAP (strtod_wrap,   double, strtod) ;
+STRTO_F_WRAP (strtold_wrap,  long double, strtold) ;
 
 /*** Parsing single elements */
 
 struct parse_elt_strto_i_param {
   const struct parse_elt_integer_param *integer_param_ptr;
   strto_i_fn wrapper;
+  size_t elt_sz;
+};
+
+struct parse_elt_strto_f_param {
+  const struct parse_elt_integer_param *number_param_ptr;
+  strto_f_fn wrapper;
   size_t elt_sz;
 };
 
@@ -98,6 +122,40 @@ parse_elt_strto_i (const char *string, void *buf, char **tailptr,
   return 0;
 }
 
+static int
+parse_elt_strto_f (const char *string, void *buf, char **tailptr,
+                   struct parse_elt_strto_f_param *param)
+{
+  const struct parse_elt_number_param *const
+    npar = param->number_param_ptr;
+  strto_f_fn strto_f = param->wrapper;
+  char *t;
+  char vb[param->elt_sz];
+  int saved_errno = errno;
+
+  errno = 0;
+  if (strto_f (vb, string, &t),
+      t == string) {
+    if (tailptr != 0) *tailptr = string;
+    errno = EINVAL;
+    /* . */
+    return -1;
+  }
+  if (errno != 0
+      && (! npar->allow_out_of_range_p || errno != ERANGE)) {
+    if (tailptr != 0) *tailptr = string;
+    /* . */
+    return -1;
+  }
+  errno = saved_errno;
+
+  if (tailptr != 0) *tailptr = skip_space_after_a_number (t, npar);
+  if (buf != 0) COPY_ARY (buf, vb, param->elt_sz);
+
+  /* . */
+  return 0;
+}
+
 #define PARSE_ELT_STRTO_I_WRAP(fn, type, wrapfn) \
     int \
     fn (const char *string, type *buf, char **tailptr, \
@@ -111,6 +169,19 @@ parse_elt_strto_i (const char *string, void *buf, char **tailptr,
       return parse_elt_strto_i (string, buf, tailptr, &p); \
     }
 
+#define PARSE_ELT_STRTO_F_WRAP(fn, type, wrapfn) \
+    int \
+    fn (const char *string, type *buf, char **tailptr, \
+        struct parse_elt_number_param *param) \
+    { \
+      struct parse_elt_strto_f_param p; \
+      p.number_param_ptr = param; \
+      p.wrapper = (strto_f_fn)wrapfn; \
+      p.elt_sz = sizeof (type); \
+      /* . */ \
+      return parse_elt_strto_f (string, buf, tailptr, &p); \
+    }
+
 PARSE_ELT_STRTO_I_WRAP (parse_elt_long, long,
                         strtol_wrap) ;
 PARSE_ELT_STRTO_I_WRAP (parse_elt_ulong, unsigned long,
@@ -119,6 +190,10 @@ PARSE_ELT_STRTO_I_WRAP (parse_elt_llong, long long,
                         strtoll_wrap) ;
 PARSE_ELT_STRTO_I_WRAP (parse_elt_ullong, unsigned long long,
                         strtoull_wrap) ;
+
+PARSE_ELT_STRTO_F_WRAP (parse_elt_float, float, strtof_wrap) ;
+PARSE_ELT_STRTO_F_WRAP (parse_elt_double, double, strtod_wrap) ;
+PARSE_ELT_STRTO_F_WRAP (parse_elt_ldouble, long double, strtold_wrap) ;
 
 /*** Loading arrays from delimited strings */
 
