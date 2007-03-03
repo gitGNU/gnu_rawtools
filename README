@@ -22,36 +22,53 @@
 
     Primary disadvantage of these formats is their non-portability:
     different kinds of machines may have different binary
-    representations for the data.
+    representations of the data.
 
 * The tools
 
-    Presently, the package includes two tools.  First one, `rawxform',
-    applies the table transformation to the stream of floating-point
-    numbers, producing another stream of numbers in the same or another
-    machine format.  Currently, `float' and `double' formats are allowed
-    for input and output, and one more format -- `uint8' (unsigned 8-bit
-    integer) is allowed for output-only.  (Primary cause for not
-    supporting `uint8' for input is the lack of a way to specify the
-    `fill' value -- an `uint8' value to be mapped to floating-point
-    `NaN' value.)  The table transformations are discussed below.
+    Currently, the package includes three tools: `rawxform', `rawmatrix'
+    and `rawilv'.  First two operate on numeric data, while the last one
+    could operate on any binary stream.
 
-    The second, `rawilv', interleaves the data of an arbitrary number of
+    The first tool, `rawxform', applies the table transformation to the
+    stream of floating-point numbers, producing another stream of
+    numbers in the same or another machine format.  Currently, `float'
+    and `double' formats are allowed for input and output, and one more
+    format -- `uint8' (unsigned 8-bit integer) is allowed for
+    output-only.  (Primary cause for not supporting `uint8' for input is
+    the lack of a way to specify the `fill' value -- an `uint8' value to
+    be mapped to floating-point `NaN' value.)  The table transformations
+    are discussed below.  Specifying an empty table (the default) allows
+    one to convert representation of the data only.
+
+    The second, `rawmatrix', interprets the input stream as the sequence
+    of numeric vectors of equal length (only `double' format is
+    supported for now), by which the specified matrix is multiplied,
+    with the resulting vectors being the output.
+
+    Both of the programs mentioned above are locale-aware, which
+    requires you to use whichever numerical notation your locale uses,
+    or to ensure that the `LC_NUMERIC' locale category is set to `C'.
+
+    Finally, `rawilv' interleaves the data of an arbitrary number of
     input streams to produce an output stream, or de-interleaves the
     data of a sole input stream to produce output streams.  The data is
     interpreted as the sequence of blocks of the sizes specified by the
     `--block-sizes' (`-s') option.  If the number of sizes specified is
-    less than the number of inputs, the last size is used for the rest
-    of the inputs.  In particular, if only one size is specified, it's
-    used for all of the inputs.  By default, block size is 1 byte.
+    less than the number of inputs, the last size specified is used for
+    the rest of the inputs.  In particular, if only one size is
+    specified, it's used for all of the inputs.  By default, block size
+    is 1 byte.
 
     The lengths of the input streams, counted in blocks, must match.  On
     detecting end-of-file condition on some streams, but not the other,
     the program signals an error.  An error is also signalled if a
     reading error or end-of-file is occured in the middle of the block.
 
-    An unuseful example (please note that the newline is 1 byte in
-    length):
+** Examples
+
+    An unuseful example of using `rawilv' (please note that the newline
+    is one byte in length):
 
 $ cat a
 abc
@@ -89,14 +106,10 @@ $
     the page above), but with left bounds (first column) multiplied by
     the value of 1.1 / 255.
 
-    The program is locale-aware, which requires you to use whichever
-    numerical notation your locale has, or to ensure that the
-    `LC_NUMERIC' locale category is set to `C'.
-
 * Transformation tables
 
     Transformation table consists of the pairs of values: the left bound
-    and the value.  When no interpolation selected, every value between
+    and the value.  When no interpolation specified, every value between
     a left bound (inclusive) and its successor is mapped to the value
     corresponding to the former.  Linear interpolation is done in
     obvious manner.  One more value in the table is the ``NaN value'' to
@@ -108,8 +121,8 @@ $
     Table transformation is performed on `double's.  When output format
     isn't `double', the values are then converted to the destination
     format, with out-of-range values mapped to the least and the most
-    values representable in the destination format.  Rounding mode is
-    unspecified.  Mapping of `NaN's is unspecified if the destination
-    format doesn't support them.
+    values representable.  Rounding mode is unspecified.  Mapping of
+    `NaN's is unspecified if the destination format doesn't support
+    them.
 
     Ivan Shmakov <ivan@theory.asu.ru>
