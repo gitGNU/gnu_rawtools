@@ -2,6 +2,39 @@
 # arch-tag: automatic-ChangeLog--ivan@theory.asu.ru--space-2007/rawtools--main--0.1
 #
 
+2007-03-07 14:07:48 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-14
+
+    Summary:
+      Replaced `ChangeLog' with an auto-maintained one (really, this time).
+    Revision:
+      rawtools--main--0.1--patch-14
+
+    ChangeLog: Replaced with the one auto-maintained by the GNU Arch
+    (really, this time).
+
+    new files:
+     .arch-ids/ChangeLog.id ChangeLog
+
+    removed files:
+     .arch-ids/ChangeLog.id ChangeLog
+
+
+2007-03-07 14:00:26 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-13
+
+    Summary:
+      Replaced `ChangeLog' with an auto-maintained one.
+    Revision:
+      rawtools--main--0.1--patch-13
+
+    ChangeLog: Replaced with the one auto-maintained by the GNU Arch.
+
+    new files:
+     .arch-ids/ChangeLog.id ChangeLog
+
+    removed files:
+     .arch-ids/ChangeLog.id ChangeLog
+
+
 2007-03-07 13:00:15 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-12
 
     Summary:
