@@ -21,9 +21,14 @@ AC_TYPE_SIZE_T
 ## Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
 AC_FUNC_MALLOC
+AC_FUNC_MEMCMP
 AC_FUNC_REALLOC
 AC_FUNC_STRTOD
-AC_CHECK_FUNCS([setlocale strtol])
+AC_CHECK_FUNCS([memset setlocale strtol])
+
+AC_SUBST([LIBS_LIBM])
+LIBS_LIBM=
+AC_CHECK_LIB([m], [sqrt], [LIBS_LIBM="$LIBS_LIBM -lm"])
 
 ## I18n
 AM_GNU_GETTEXT()
