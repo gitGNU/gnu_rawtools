@@ -2,6 +2,21 @@
 # arch-tag: automatic-ChangeLog--ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1
 #
 
+2007-03-10 19:58:49 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-35
+
+    Summary:
+      A few more Autotools-related files are to be considered `precious'.
+    Revision:
+      rawtools--main--0.1--patch-35
+
+    {arch}/=tagging-method: A few more patterns added to a `precious' rule;
+    namely, these files are considered `precious': `mdate-sh', `stamp-vti',
+    `version.texi', as well as any file with a `.info' suffix.
+
+    modified files:
+     ChangeLog {arch}/=tagging-method
+
+
 2007-03-10 16:35:21 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-34
 
     Summary:
