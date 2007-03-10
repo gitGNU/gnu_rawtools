@@ -1,0 +1,9 @@
+rawtools (0.1a1) unstable; urgency=low
+
+  * Debianized.
+
+ -- Ivan Shmakov <ivan@theory.asu.ru>  Wed, 07 Mar 2007 18:58:04 +0600
+
+Local variables:
+mode: debian-changelog
+End:

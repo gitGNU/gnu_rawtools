@@ -1,0 +1,19 @@
+Source: rawtools
+Section: utils
+Priority: extra
+Maintainer: Ivan Shmakov <ivan@theory.asu.ru>
+Build-Depends: debhelper (>= 5.0.0)
+Standards-Version: 3.7.2
+
+Package: rawtools
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Miscellaneous utilities to work with raw (binary) data
+ Rawtools is the package dedicated to the processing of the so-called
+ ``raw'' (or binary) data files.  This package is to facilitate
+ some common tasks on raw data files, such as format (representation)
+ conversion, partitioning, etc.
+ .
+ Currently, the package includes three tools: `rawxform', `rawmatrix'
+ and `rawilv'.  First two operate on numeric data (in machine's own
+ format), while the last one could operate on any binary stream.
