@@ -36,6 +36,7 @@ AM_GNU_GETTEXT_VERSION([0.14.4])
 
 ## Output
 AC_CONFIG_FILES([Makefile
+                 doc/Makefile
                  intl/Makefile:intl/Makefile.inx
                  lib/Makefile
                  m4/Makefile
