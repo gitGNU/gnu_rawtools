@@ -2,6 +2,47 @@
 # arch-tag: automatic-ChangeLog--ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1
 #
 
+2007-04-23 12:34:08 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-38
+
+    Summary:
+      Added proper copyleft notices.
+    Revision:
+      rawtools--main--0.1--patch-38
+
+    lib/numconv.c: Added proper copyleft notices.
+    lib/numconv.h: Likewise.
+    lib/oalist.c: Likewise.
+    lib/oalist.h: Likewise.
+    lib/p_arg.c: Likewise.
+    lib/p_arg.h: Likewise.
+    lib/parselts.c: Likewise.
+    lib/parselts.h: Likewise.
+    lib/usemacro.h: Likewise.
+    lib/useutil.c: Likewise.
+    lib/useutil.h: Likewise.
+    lib/xform.c: Likewise.
+    lib/xform.h: Likewise.
+    src/rawilv.c: Likewise.
+    src/rawmatrix.c: Likewise.
+    src/rawxform.c: Likewise.
+    
+    Patches applied:
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-15
+       Added proper copyleft notices.
+    
+
+    modified files:
+     ChangeLog lib/numconv.c lib/numconv.h lib/oalist.c
+     lib/oalist.h lib/p_arg.c lib/p_arg.h lib/parselts.c
+     lib/parselts.h lib/usemacro.h lib/useutil.c lib/useutil.h
+     lib/xform.c lib/xform.h src/rawilv.c src/rawmatrix.c
+     src/rawxform.c
+
+    new patches:
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-15
+
+
 2007-04-08 18:34:50 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-37
 
     Summary:
