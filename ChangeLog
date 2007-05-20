@@ -2,6 +2,26 @@
 # arch-tag: automatic-ChangeLog--ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1
 #
 
+2007-05-19 21:15:25 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-39
+
+    Summary:
+      Put ``C Numeric Types Extrema Finding'' into `librawtools'.
+    Revision:
+      rawtools--main--0.1--patch-39
+
+    lib/numrange.c: Source for the new ``C Numeric Types Extrema Finding''
+    library module.
+    lib/numrange.h: Likewise.
+    lib/Makefile.am (librawtools_a_SOURCES): Added `numrange.c'.
+
+    new files:
+     lib/.arch-ids/numrange.c.id lib/.arch-ids/numrange.h.id
+     lib/numrange.c lib/numrange.h
+
+    modified files:
+     ChangeLog lib/Makefile.am
+
+
 2007-04-23 12:34:08 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-38
 
     Summary:
