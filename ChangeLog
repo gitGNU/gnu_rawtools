@@ -2,6 +2,46 @@
 # arch-tag: automatic-ChangeLog--ivan@theory.asu.ru--space-2007/rawtools--main--0.1
 #
 
+2007-05-20 10:51:50 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-18
+
+    Summary:
+      A no-change revision due to `star-merge'.
+    Revision:
+      rawtools--main--0.1--patch-18
+
+    Patches applied:
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-29
+       Removed duplicate `AC_OUTPUT' from `configure.ac'.
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-30
+       Put more tests into `configure.ac'.
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-31
+       Fixed: link `rawmatrix' with `-lm', if needed.
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-32
+       Debianized for the first time.
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-33
+       Replaced `ChangeLog' with an auto-maintained one.
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-34
+       Maintain `ChangeLog' for a proper branch.
+    
+
+    modified files:
+     ChangeLog
+
+    new patches:
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-29
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-30
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-31
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-32
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-33
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-34
+
+
 2007-05-20 10:46:42 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-17
 
     Summary:
