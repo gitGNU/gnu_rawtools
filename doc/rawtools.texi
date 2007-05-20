@@ -12,7 +12,7 @@
 
 @copying
 This manual documents version @value{VERSION} of Rawtools, the package
-dedicated to handling of the raw data.
+dedicated to handling of raw data.
 
 Copyright @copyright{} 2007 Ivan Shmakov
 
@@ -56,7 +56,7 @@ Free Documentation License".
 @top Rawtools
 
 This manual documents version @value{VERSION} of Rawtools, the package
-dedicated to handling of the raw data.
+dedicated to handling of raw data.
 
 @menu
 * Introduction::                The purpose.
@@ -71,10 +71,10 @@ dedicated to handling of the raw data.
 @node Introduction
 @chapter Introduction to Rawtools
 
-Rawtools is the package dedicated to the processing of the so-called
-``raw'' data files, i.@tie{}e., the files holding some machine
-representation of the data, without any associated header information
-contained inside of them.  This package is to facilitate some common
+Rawtools is the package dedicated to the processing of raw data files,
+also known as binary files.  Usually, such files are used to store data
+in exactly the same representation as it's stored in the machine's
+memory.  This package is to facilitate some common
 tasks on raw data files, such as format (representation) conversion,
 partitioning, etc.
 
@@ -86,8 +86,8 @@ partitioning, etc.
 @node Raw data formats
 @section On raw data formats
 
-Raw data format is sometimes used in scientific and engineering tasks as
-an intermediate or, rarely, as a final product.
+Raw data formats are sometimes used in scientific and engineering tasks
+for intermediate or, not so often, for final products.
 
 Primary advantage of such raw data formats is the high processing speed:
 there's no need to convert raw data to or from machine's representation
@@ -122,12 +122,13 @@ To specify a sequence of values (e.@tie{}g., block sizes for the
 @code{rawilv} program, @pxref{rawilv invocation}), delimit them with
 commas, e.@tie{}g., @code{1, 2, 4}.  Any leading or trailing whitespace
 is ignored, as well as any whitespace before or after delimiters.  No
-trailing characters (except for whitespace) is allowed.
+trailing characters (except for whitespace) are allowed.
 
-A matrix is specified by specifying of all its elements, in
-rows-to-columns order.  Note that either the number of columns should be
+A matrix is specified by specifying of all its elements, in row-major
+order.  Note that either the number of columns should be
 given (with a separate option), or the matrix will be assumed square, or
-square with one extra column (if option such as @code{--trailing-1} is
+square with one extra column (if an option such as @code{--trailing-1}
+is
 in effect).  An error will be signalled if there're more or less matrix
 elements than expected.
 

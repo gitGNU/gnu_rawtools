@@ -2,6 +2,37 @@
 # arch-tag: automatic-ChangeLog--ivan@theory.asu.ru--space-2007/rawtools--main--0.1
 #
 
+2007-05-20 10:57:30 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-21
+
+    Summary:
+      Minor documentation fixes.
+    Revision:
+      rawtools--main--0.1--patch-21
+
+    doc/rawtools.texi (@copying): Fixed: ``... of raw data.''
+    (@top): Likewise.
+    (Introduction): Fixed: ``... of raw data files.''
+    
+    doc/rawtools.texi (Basic conventions): Fixed: ``No ... characters
+    ... are allowed''; fixed ``row-major'', too.
+    
+    doc/rawtools.texi (Introduction): Slightly better wording.
+    (Raw data formats): Likewise.
+    (Basic conventions): Likewise.
+    
+    Patches applied:
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-37
+       Minor documentation fixes.
+    
+
+    modified files:
+     ChangeLog doc/rawtools.texi
+
+    new patches:
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-37
+
+
 2007-05-20 10:55:43 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-20
 
     Summary:
