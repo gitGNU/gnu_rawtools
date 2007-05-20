@@ -2,6 +2,33 @@
 # arch-tag: automatic-ChangeLog--ivan@theory.asu.ru--space-2007/rawtools--main--0.1
 #
 
+2007-05-20 11:02:55 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-24
+
+    Summary:
+      New program: `rawrange'.
+    Revision:
+      rawtools--main--0.1--patch-24
+
+    src/rawrange.c: Source for the new `rawrange' program.
+    src/Makefile.am (bin_PROGRAMS): Added `rawrange'.
+    (rawrange_SOURCES): New variable.
+    
+    Patches applied:
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-40
+       New program: `rawrange'.
+    
+
+    new files:
+     src/.arch-ids/rawrange.c.id src/rawrange.c
+
+    modified files:
+     ChangeLog src/Makefile.am
+
+    new patches:
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-40
+
+
 2007-05-20 11:01:54 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-23
 
     Summary:

@@ -1,5 +1,5 @@
 
-bin_PROGRAMS = rawilv rawmatrix rawxform
+bin_PROGRAMS = rawilv rawmatrix rawrange rawxform
 
 LDADD = $(top_builddir)/lib/librawtools.a
 localedir   = $(datadir)/locale
@@ -13,5 +13,7 @@ rawmatrix_LDADD += $(LIBS_LIBM)
 rawilv_SOURCES = rawilv.c
 
 rawmatrix_SOURCES = rawmatrix.c
+
+rawrange_SOURCES = rawrange.c
 
 rawxform_SOURCES = rawxform.c
