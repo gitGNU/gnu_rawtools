@@ -2,6 +2,39 @@
 # arch-tag: automatic-ChangeLog--ivan@theory.asu.ru--space-2007/rawtools--main--0.1
 #
 
+2007-05-20 10:55:43 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-20
+
+    Summary:
+      Initial Texinfo documentation.
+    Revision:
+      rawtools--main--0.1--patch-20
+
+    doc/rawtools.texi: New file.
+    doc/fdl.texi: Copied-in from http://www.fsf.org/.
+    doc/texinfo.tex: Copied-in from Automake 1.9.
+    
+    doc/Makefile.am: New file.
+    configure.ac (AC_CONFIG_FILES): Mention `doc/Makefile' as well.
+    Makefile.am (SUBDIRS, DIST_SUBDIRS): Prepended `doc'.
+    
+    Patches applied:
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-36
+       Initial Texinfo documentation.
+    
+
+    new files:
+     doc/.arch-ids/Makefile.am.id doc/.arch-ids/fdl.texi.id
+     doc/.arch-ids/rawtools.texi.id doc/.arch-ids/texinfo.tex.id
+     doc/Makefile.am doc/fdl.texi doc/rawtools.texi doc/texinfo.tex
+
+    modified files:
+     ChangeLog Makefile.am configure.ac
+
+    new patches:
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-36
+
+
 2007-05-20 10:54:03 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-19
 
     Summary:

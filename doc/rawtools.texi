@@ -1,0 +1,176 @@
+\input texinfo
+@c rawtools.texi  -*- Texinfo -*-
+
+@setfilename rawtools.info
+@include version.texi
+@settitle Rawtools Manual @value{VERSION}
+
+@c A few options
+@footnotestyle separate
+@paragraphindent 3
+@finalout
+
+@copying
+This manual documents version @value{VERSION} of Rawtools, the package
+dedicated to handling of the raw data.
+
+Copyright @copyright{} 2007 Ivan Shmakov
+
+@quotation
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.1 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+Texts.  A copy of the license is included in the section entitled "GNU
+Free Documentation License".
+@end quotation
+
+@end copying
+
+@dircategory Basics
+@direntry
+* Rawtools: (rawtools).         Handling raw (binary) data.
+@end direntry
+
+@c Title page
+@titlepage
+@title Rawtools User Manual
+@subtitle for Rawtools version @value{VERSION}
+@subtitle @value{UPDATED}
+@author Ivan Shmakov
+@c The following two commands start the copyright page.
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@c A few more options
+@setchapternewpage odd
+@headings double
+
+@c Table of contents
+@contents
+
+@ifnottex
+@node Top
+@top Rawtools
+
+This manual documents version @value{VERSION} of Rawtools, the package
+dedicated to handling of the raw data.
+
+@menu
+* Introduction::                The purpose.
+* Basic conventions::           How various arguments are specified.
+* Raw data as blocks::          How to use the block-oriented tools.
+* Raw data as numbers::         How to use the numeric-oriented tools.
+* Copying This Manual::         Copying This Manual
+* Index::
+@end menu
+@end ifnottex
+
+@node Introduction
+@chapter Introduction to Rawtools
+
+Rawtools is the package dedicated to the processing of the so-called
+``raw'' data files, i.@tie{}e., the files holding some machine
+representation of the data, without any associated header information
+contained inside of them.  This package is to facilitate some common
+tasks on raw data files, such as format (representation) conversion,
+partitioning, etc.
+
+@menu
+* Raw data formats::            What they're used for?
+* The tools::                   What tools have been written so far?
+@end menu
+
+@node Raw data formats
+@section On raw data formats
+
+Raw data format is sometimes used in scientific and engineering tasks as
+an intermediate or, rarely, as a final product.
+
+Primary advantage of such raw data formats is the high processing speed:
+there's no need to convert raw data to or from machine's representation
+on reading or writing.  Also, floating-point numbers converted to text
+strings might suffer from loss of precision, and generally the raw
+formats are more storage-efficient than the text ones.
+
+Primary disadvantage of these formats is their non-portability:
+different kinds of machines may have different binary representations of
+the data.
+
+@node The tools
+@section The tools
+
+Currently, the package includes three tools: @code{rawxform},
+@code{rawmatrix} and @code{rawilv}.  First two treat the data being
+processed as the sequence of numbers (in machine's own representation),
+while the latter treats it as the sequence of arbitrarily-sized blocks,
+and thus could operate on any binary stream.
+
+@node Basic conventions
+@chapter Basic conventions
+
+The numbers are specified in usual manner; e.@tie{}g., @code{123} means
+123, an integer, and @code{1e2} means 100, a floating-point number.
+Integers are allowed whenever floating-point numbers are allowed, but
+not vice versa.  Integer numbers are used to specify integral values
+(such as block sizes.)  Any leading whitespace is ignored, and no
+trailing characters are allowed after a number.
+
+To specify a sequence of values (e.@tie{}g., block sizes for the
+@code{rawilv} program, @pxref{rawilv invocation}), delimit them with
+commas, e.@tie{}g., @code{1, 2, 4}.  Any leading or trailing whitespace
+is ignored, as well as any whitespace before or after delimiters.  No
+trailing characters (except for whitespace) is allowed.
+
+A matrix is specified by specifying of all its elements, in
+rows-to-columns order.  Note that either the number of columns should be
+given (with a separate option), or the matrix will be assumed square, or
+square with one extra column (if option such as @code{--trailing-1} is
+in effect).  An error will be signalled if there're more or less matrix
+elements than expected.
+
+When specifying a numeric type, C type names are used (e.@tie{}g.,
+@code{float} or @code{double}).  If integer types are supported by a
+particular application, an @code{stdint.h} (@pxref{Integers, , , libc,
+The GNU C Library Reference Manual}) type name without a trailing
+@code{_t} could be used (e.@tie{}g., @code{uint8}).
+
+The programs are locale-aware, which requires you to use whichever
+numerical notation your locale uses, or to ensure that the
+@code{LC_NUMERIC} locale category is set to @code{C}.
+
+@node Raw data as blocks
+@chapter Raw data as blocks
+
+@menu
+* rawilv invocation::           Interleave blocks of the files.
+@end menu
+
+
+@node rawilv invocation
+@section @code{rawilv}: Interleave blocks
+
+
+@node Raw data as numbers
+@chapter Raw data as numbers
+
+
+@node Copying This Manual
+@appendix Copying This Manual
+
+@menu
+* GNU Free Documentation License::  License for copying this manual.
+@end menu
+
+@include fdl.texi
+
+@node Index
+@unnumbered Index
+
+@bye
+@c Local variables:
+@c fill-column: 72
+@c End:
+@c rawtools.texi ends here
