@@ -2,6 +2,26 @@
 # arch-tag: automatic-ChangeLog--ivan@theory.asu.ru--space-2007/rawtools--main--0.1
 #
 
+2007-05-20 10:44:31 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-16
+
+    Summary:
+      A no-change revision due to `star-merge'.
+    Revision:
+      rawtools--main--0.1--patch-16
+
+    Patches applied:
+    
+     * ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-27
+       A no-change revision due to `star-merge'.
+    
+
+    modified files:
+     ChangeLog
+
+    new patches:
+     ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1--patch-27
+
+
 2007-04-22 08:36:32 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-15
 
     Summary:
