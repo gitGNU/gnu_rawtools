@@ -2,6 +2,58 @@
 # arch-tag: automatic-ChangeLog--ivan@ivanshmakov.homeip.net--space-2007/rawtools--main--0.1
 #
 
+2007-05-20 17:39:09 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-41
+
+    Summary:
+      A no-change revision due to `star-merge'.
+    Revision:
+      rawtools--main--0.1--patch-41
+
+    Patches applied:
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-16
+       A no-change revision due to `star-merge'.
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-17
+       A no-change revision due to `star-merge'.
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-18
+       A no-change revision due to `star-merge'.
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-19
+       A few more Autotools-related files are to be considered `precious'.
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-20
+       Initial Texinfo documentation.
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-21
+       Minor documentation fixes.
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-22
+       A no-change revision due to `star-merge'.
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-23
+       Put ``C Numeric Types Extrema Finding'' into `librawtools'.
+    
+     * ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-24
+       New program: `rawrange'.
+    
+
+    modified files:
+     ChangeLog
+
+    new patches:
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-16
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-17
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-18
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-19
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-20
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-21
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-22
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-23
+     ivan@theory.asu.ru--space-2007/rawtools--main--0.1--patch-24
+
+
 2007-05-19 22:07:47 GMT	Ivan Shmakov <ivan@theory.asu.ru>	patch-40
 
     Summary:
